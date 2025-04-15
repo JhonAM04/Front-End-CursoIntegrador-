@@ -61,7 +61,7 @@ const NavBar = () => {
                 </MenuButton>
                 <MenuList>
                   <MenuGroup title='Profile'>
-                    <MenuItem>My Account</MenuItem>
+                    <MenuItem as={Link} to={Paths.ProfileData}>My Account</MenuItem>
                     <MenuItem>Logros </MenuItem>
                   </MenuGroup>
                   <MenuDivider />

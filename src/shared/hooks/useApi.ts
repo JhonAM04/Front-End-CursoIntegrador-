@@ -26,7 +26,7 @@ const useApi = () =>{
 
       const bd = await fetch('http://localhost:8080/perfil/', {
         headers: {
-          'Authorization': `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnYW1lcmpob25jZW5hMTY3QGdtYWlsLmNvbSIsImV4cCI6MTc0NDY5MDYzMCwiaWF0IjoxNzQ0Njg3MDMwfQ.W5MAXZMOTr-vPJRUsHI8WusDO1fDpnqs_6jjoxy_CLA"}`}
+          'Authorization': `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnYW1lcmpob25jZW5hMTY3QGdtYWlsLmNvbSIsImV4cCI6MTc0NDY5ODIxOCwiaWF0IjoxNzQ0Njk0NjE4fQ.knQjBHWhaHOKinT0eC7wRX6LcM7-6yeLQnHll6J3sUg"}`}
       })
       const data = await bd.json()
       
@@ -40,7 +40,7 @@ const useApi = () =>{
 
       const bd = await fetch('http://localhost:8080/perfil/', {
         headers: {
-          'Authorization': `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnYW1lcmpob25jZW5hMTY3QGdtYWlsLmNvbSIsImV4cCI6MTc0NDY5MDYzMCwiaWF0IjoxNzQ0Njg3MDMwfQ.W5MAXZMOTr-vPJRUsHI8WusDO1fDpnqs_6jjoxy_CLA"}`}
+          'Authorization': `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnYW1lcmpob25jZW5hMTY3QGdtYWlsLmNvbSIsImV4cCI6MTc0NDY5ODIxOCwiaWF0IjoxNzQ0Njk0NjE4fQ.knQjBHWhaHOKinT0eC7wRX6LcM7-6yeLQnHll6J3sUg"}`}
       })
       const data = await bd.json()
       

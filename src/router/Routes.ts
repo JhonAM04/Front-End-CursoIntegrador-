@@ -5,7 +5,8 @@ export const Elements = {
     Login: lazy(()=> import("../pages/auth/Login")),
     Error404: lazy(()=> import("../pages/Error404")),
     ForgotenPassword: lazy(()=> import("../pages/auth/ForgotenPassword")),
-    CrudDocente: lazy(()=> import("../pages/CrudDocente"))
+    CrudDocente: lazy(()=> import("../pages/CrudDocente")),
+    ProfileData: lazy(()=> import("../pages/ProfileData"))
 
 }
 
@@ -13,6 +14,7 @@ export const Paths = {
     Login: '/',
     ForgotenPassword: '/recuperacion',
     Home : '/home',
-    CrudDocente: '/cruddocente'
+    CrudDocente: '/cruddocente',
+    ProfileData: '/profile'
 
 }

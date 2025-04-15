@@ -17,6 +17,7 @@ const AppRoutes = () => {
           <Route element={<NavBarOutlet />} >
             <Route path={Paths.Home} element={<Elements.Home/>} />
             <Route path={Paths.CrudDocente} element={<Elements.CrudDocente/>} />
+            <Route path={Paths.ProfileData} element={<Elements.ProfileData/>} />
           </Route>
       </Route>
 
