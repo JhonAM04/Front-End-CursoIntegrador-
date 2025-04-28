@@ -2,7 +2,7 @@ import { Button, HStack, Menu, MenuButton, MenuDivider, MenuGroup, MenuItem, Men
 import { Link, useNavigate } from "react-router-dom"
 import { Paths } from "../../router/Routes"
 import { useEffect, useState } from "react"
-import { profile } from "../../declarations/ApiDeclarations"
+import { profile, sessionvar } from "../../declarations/ApiDeclarations"
 import { toast } from "sonner"
 import useApi from "../hooks/useApi"
 
@@ -11,7 +11,7 @@ const NavBar = () => {
   const apiAccount = localStorage.getItem('session')
   if (!apiAccount) return
 
-  const session = JSON.parse(apiAccount)
+  const session: sessionvar = JSON.parse(apiAccount)
 
   const [profile, setProfile] = useState<profile>()
   
@@ -20,7 +20,7 @@ const NavBar = () => {
   const { getProfileandAccount  } = useApi()
 
   const Profile = async() => {
-    const perfil = await getProfileandAccount(session.id) 
+    const perfil = await getProfileandAccount(session.id, session.token) 
     setProfile(perfil)
   }
 

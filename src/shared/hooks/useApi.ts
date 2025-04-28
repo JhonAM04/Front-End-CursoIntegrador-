@@ -2,10 +2,15 @@
 import { toast } from "sonner"
 import { profile } from "../../declarations/ApiDeclarations"
 import emailjs from '@emailjs/browser'
+import { useNavigate } from "react-router-dom"
+import { Paths } from "../../router/Routes"
 
 const useApi = () =>{
 
+  const Navigate = useNavigate()
+
     const apiLogin = async (login:string, password:string) => {
+
       
         const bd = await fetch('http://localhost:8080/Login', {
             method: 'POST',
@@ -16,17 +21,29 @@ const useApi = () =>{
             })
           })
     
-          const response = await bd.json()
+          const response = await bd.json().then((response)=>{
+            if(response.message == 'Unknown user'){
+              toast.error('Credenciales incorrectas')
+            }if(response.message == 'Invalid password'){
+              toast.error('Contraseña incorrecta')
+            }else{
+              toast.success('Iniciaste sesion con exito')
+              localStorage.setItem('session', JSON.stringify(response))
+              Navigate(Paths.Home)
+            }
+          })
+
+          
           
           return response
     }
     
 
-    const getProfileandAccount = async(id: number)=>{
+    const getProfileandAccount = async(id: number, token: string)=>{
 
       const bd = await fetch('http://localhost:8080/perfil/', {
         headers: {
-          'Authorization': `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnYW1lcmpob25jZW5hMTY3QGdtYWlsLmNvbSIsImV4cCI6MTc0NDY5ODIxOCwiaWF0IjoxNzQ0Njk0NjE4fQ.knQjBHWhaHOKinT0eC7wRX6LcM7-6yeLQnHll6J3sUg"}`}
+          'Authorization': `Bearer ${token}`}
       })
       const data = await bd.json()
       
@@ -64,8 +81,27 @@ const useApi = () =>{
       
     }
 
+    const editarProfile = async(id: number, token: string , nombre: string, apellido: string, dni: number, sexo: string, fechanac: Date) => {
+      const bd = await fetch(`http://localhost:8080/perfil/${id}`,{
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          nombre: nombre,
+          apellido: apellido,
+          dni: dni,
+          sexo: sexo,
+          fechanac: fechanac
+        })
+      })
+      const data = await bd.json()
+      console.log(data)
+      return data
+    }
+
     return{
-        apiLogin, getProfileandAccount, getEmail
+        apiLogin, getProfileandAccount, getEmail, editarProfile
     }
 }
 

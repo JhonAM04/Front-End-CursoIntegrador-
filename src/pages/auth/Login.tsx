@@ -1,14 +1,12 @@
 import { Box, Button, FormControl, FormLabel, Heading, HStack, Input, Link, Text } from "@chakra-ui/react"
-import { useNavigate, Link as ReactLink } from "react-router-dom"
+import { Link as ReactLink } from "react-router-dom"
 import bgLogin from "../../assets/login.jpg"
 import React from "react"
 import { Paths } from "../../router/Routes"
-import { toast } from "sonner"
 import useApi from "../../shared/hooks/useApi"
 
 const Login = () => {
 
-  const Navigate = useNavigate()
   const { apiLogin } = useApi()
 
   const LogearApi = async (e:React.FormEvent<HTMLFormElement>) => {
@@ -22,17 +20,7 @@ const Login = () => {
         [k: string]: string
       }
 
-      const apiSession = await apiLogin(login, password)
-
-      if(apiSession.message == 'Unknown user'){
-        toast.error('Credenciales incorrectas')
-      }else{
-        toast.success('Iniciaste sesion con exito')
-        localStorage.setItem('session', JSON.stringify(apiSession))
-        Navigate(Paths.Home)
-      }
-      
-
+       await apiLogin(login, password)
     }
   }
 

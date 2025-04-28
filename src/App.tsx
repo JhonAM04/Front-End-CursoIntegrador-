@@ -6,7 +6,7 @@ const App = () => {
   return (
     <ChakraProvider>
       <Toaster richColors />
-      <AppRoutes />
+          <AppRoutes />
     </ChakraProvider>
   )
 }

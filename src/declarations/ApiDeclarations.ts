@@ -1,6 +1,7 @@
 export type sessionvar = {
     id: number
     login : string
+    token: string
 }
 
 type rol = {
@@ -9,12 +10,13 @@ type rol = {
 }
 
 export type profile = {
+    nombre: string
     apellido: string
     dni: number
     fechanac: Date
+    sexo: 'masculino' | 'femenino'
     fotoperfil: string
     idDocente: number
-    nombre: string
     rol : Array<rol>
     usuario: sessionvar
 }
