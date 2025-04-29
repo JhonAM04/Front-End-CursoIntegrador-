@@ -1,54 +1,30 @@
-# React + TypeScript + Vite
+# 📚 Sistema Web de Aprendizaje de Inglés para Primaria 🇬🇧🧒👧
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es una plataforma web educativa dirigida a estudiantes de **nivel primaria**. Permite a los niños aprender inglés de manera **interactiva**, mientras los docentes pueden hacer seguimiento del progreso de cada estudiante.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Tecnologías Utilizadas
 
-## Expanding the ESLint configuration
+### 🖥️ Frontend
+- ⚛️ **React** – Librería para construir la interfaz de usuario.
+- 🎨 **Tailwind CSS** – Estilizado moderno y responsivo.
+- 🔗 **Axios** – Cliente HTTP para comunicación con el backend.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### ⚙️ Backend
+- ☕ **Spring Boot** – Framework en Java para la lógica del servidor.
+- 🔐 **Spring Security** – Control de accesos.
+- 🗃️ **Spring Data JPA** – Gestión de base de datos.
+- 🐬 **MySQL** – Motor de base de datos relacional.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## ✨ Características Principales
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- 👨‍🏫 Registro y login para estudiantes y docentes.
+- 🎮 Juegos y ejercicios por nivel.
+- 📈 Seguimiento de progreso individual.
+- ✅ Evaluaciones por tema.
+- 🧑‍💻 Panel docente con reportes y estadísticas.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+---
