@@ -19,11 +19,11 @@ const Home = () => {
 
       <main>
 
-        <VStack w='100%' h='100vh' mt='100px' gap='5em'>
+        <VStack  gap='5em' bgColor='#f2f2f2'>
 
           <Box >
 
-          <video autoPlay loop muted style={{height:'90vh', width: '100vw' ,objectFit:'cover', objectPosition:'center'}}>
+          <video autoPlay loop muted style={{height:'90vh', borderRadius:'20px' , width: '100vw' ,objectFit:'cover', objectPosition:'center'}}>
             <source src={bgHome} />
           </video>
 
@@ -50,7 +50,7 @@ const Home = () => {
           </VStack>
 
           <Box data-aos="zoom-in-up" data-aos-duration="1000" zIndex={0}>
-              <Image src={item1} w='100%' />
+              <Image src={item1} w='100%' borderRadius='20px' />
           </Box>
 
         </VStack>

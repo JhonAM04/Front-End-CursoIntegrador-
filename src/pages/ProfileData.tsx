@@ -1,27 +1,24 @@
 import { Box, Button, Divider, FormControl, FormLabel, Heading, HStack, Input, Select, VStack } from "@chakra-ui/react"
-import { sessionvar, profile } from "../declarations/ApiDeclarations"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import useApi from "../shared/hooks/useApi"
 import { toast } from "sonner"
+import { UsuarioContext } from "../shared/contexts/UsuarioContext"
+import { sessionvar } from "../declarations/ApiDeclarations"
 
 const ProfileData = () => {
-  const apiAccount = localStorage.getItem('session')
+
+  const usuario = useContext(UsuarioContext)
+  
   const [sex, setSex] = useState<'masculino'| 'femenino'>("masculino")
-  if (!apiAccount) return
+  const [session, setSession] = useState<sessionvar>()
 
-  const session: sessionvar = JSON.parse(apiAccount)
-
-  const [profile, setProfile] = useState<profile>()
+  
   
   
 
-  const { getProfileandAccount, editarProfile  } = useApi()
+  const { editarProfile  } = useApi()
 
-  const Profile = async() => {
-    const perfil = await getProfileandAccount(session.id, session.token) 
-    setProfile(perfil)
-    setSex((perfil as profile).sexo)
-  }
+
 
   const edit = async(e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -35,7 +32,8 @@ const ProfileData = () => {
       }
       const fechaNacimiento = new Date(fechanac)
       const DNI = Number(dni)
-      await editarProfile(session.id, session.token , nombre, apellido, DNI, sexo, fechaNacimiento).then(()=>{
+      await editarProfile(session!.id, session!.token , nombre, apellido, DNI, sexo, fechaNacimiento).then(async()=>{
+        await usuario?.getProfile(session!.id, session!.token)
         toast.success('Datos actualizados correctamente')
       }).catch(()=>{
         toast.error('Hubo un error')
@@ -44,11 +42,15 @@ const ProfileData = () => {
   }
 
   useEffect(()=>{
-      Profile()
-    },[])
+    if(usuario?.profile){
+      setSex(usuario.profile.sexo)
+    }
+  
+    setSession(JSON.parse(localStorage.getItem('session')!))
+  },[])
 
   return (
-    <VStack justifyContent='center' alignItems='center' w='100%' h='100vh' mt='100px'>
+    <VStack justifyContent='center' alignItems='center' w='100%' h='100vh' >
       <HStack gap='2em' h='fit-content'>
         <Box h='100%' display='flex' gap='1em'>
           <Heading>PERFIL</Heading>
@@ -58,15 +60,15 @@ const ProfileData = () => {
           <Box as='form' onSubmit={edit}>
               <FormControl>
                 <FormLabel>Nombre</FormLabel>
-                <Input type="text" name="nombre" defaultValue={profile?.nombre} />
+                <Input type="text" name="nombre" defaultValue={usuario?.profile?.nombre} />
               </FormControl>
               <FormControl>
                 <FormLabel>Apellido</FormLabel>
-                <Input type="text" name="apellido" defaultValue={profile?.apellido} />
+                <Input type="text" name="apellido" defaultValue={usuario?.profile?.apellido} />
               </FormControl>
               <FormControl>
                 <FormLabel>DNI:</FormLabel>
-                <Input type="number" name="dni" defaultValue={profile?.dni} variant='filled' readOnly />
+                <Input type="number" name="dni" defaultValue={usuario?.profile?.dni} variant='filled' readOnly />
               </FormControl>
               <FormControl>
                 <FormLabel>Sexo</FormLabel>
@@ -77,7 +79,7 @@ const ProfileData = () => {
               </FormControl>
               <FormControl>
                 <FormLabel>Fecha de nacimiento</FormLabel>
-                <Input type="date" name="fechanac" defaultValue={profile?.fechanac} />
+                <Input type="date" name="fechanac" defaultValue={usuario?.profile?.fechanac.toString()} />
               </FormControl>
               <Button type="submit">Guardar cambios</Button>
             </Box>

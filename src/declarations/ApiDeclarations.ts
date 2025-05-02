@@ -10,13 +10,13 @@ type rol = {
 }
 
 export type profile = {
+    idPerfil: number
     nombre: string
     apellido: string
     dni: number
     fechanac: Date
     sexo: 'masculino' | 'femenino'
     fotoperfil: string
-    idDocente: number
-    rol : Array<rol>
+    rol : rol
     usuario: sessionvar
 }

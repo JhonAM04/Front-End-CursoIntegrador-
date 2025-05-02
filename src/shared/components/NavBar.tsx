@@ -1,77 +1,44 @@
-import { Button, HStack, Menu, MenuButton, MenuDivider, MenuGroup, MenuItem, MenuList } from "@chakra-ui/react"
-import { Link, useNavigate } from "react-router-dom"
+import { Box, Heading, VStack, Image } from "@chakra-ui/react"
+import { Link } from "react-router-dom"
+import logo from "../../assets/logoCole.jpeg"
+import { useContext } from "react"
+import { UsuarioContext } from "../contexts/UsuarioContext"
 import { Paths } from "../../router/Routes"
-import { useEffect, useState } from "react"
-import { profile, sessionvar } from "../../declarations/ApiDeclarations"
-import { toast } from "sonner"
-import useApi from "../hooks/useApi"
 
 const NavBar = () => {
-  
-  const apiAccount = localStorage.getItem('session')
-  if (!apiAccount) return
-
-  const session: sessionvar = JSON.parse(apiAccount)
-
-  const [profile, setProfile] = useState<profile>()
-  
-  
-
-  const { getProfileandAccount  } = useApi()
-
-  const Profile = async() => {
-    const perfil = await getProfileandAccount(session.id, session.token) 
-    setProfile(perfil)
-  }
-
-
-  useEffect(()=>{
-    Profile()
-  },[])
-  
-  const navigate = useNavigate()
-
-  const theme = {
-    colors : {
-      navBar : '#2B8687'
-    }
-  }
-
-  const cerrarSession = () => {
-    localStorage.removeItem('session')
-    navigate(Paths.Login)
-    toast.success('Cerraste session con exito')
-    
-  }
+  const usuario = useContext(UsuarioContext)
 
   return (
     <>
-        <HStack display='flex' alignItems='center' justifyContent='space-between' height='100px' w='100vw' bgColor={theme.colors.navBar} px='5em' position='fixed' top='0' zIndex='999'>
-            <HStack>
-                <Link to='' >Home</Link>
-                <Link to='' >Lessons</Link>
-                <Link to='' >Activities</Link>
-                <Link to='' >Games</Link>
-            </HStack>
+      
 
-            <HStack>
-            <Menu>
-                <MenuButton as={Button} colorScheme='pink'>
-                  {profile?.nombre} {profile?.apellido}
-                </MenuButton>
-                <MenuList>
-                  <MenuGroup title='Profile'>
-                    <MenuItem as={Link} to={Paths.ProfileData}>My Account</MenuItem>
-                    <MenuItem>Logros </MenuItem>
-                  </MenuGroup>
-                  <MenuDivider />
-                  <MenuGroup>
-                    <MenuItem onClick={cerrarSession} >Log out</MenuItem>
-                  </MenuGroup>
-                </MenuList>
-              </Menu>
-            </HStack>
-        </HStack>
+        <VStack alignItems='flex-start'  gap='1em' p='1em'  height='95vh' w='200px' bgColor='white'  position='fixed' zIndex='999' borderRadius='20px' >
+            
+                <Box display='flex' alignItems='center' mb='50px' w='100%'>
+                  <Image src={logo} boxSize='95px' />
+                  <Heading fontSize='1em'>William Shakespare</Heading>
+                </Box>
+
+                <VStack alignItems='flex-start' fontSize='20px' gap='2em'>
+                {
+                  usuario?.profile?.rol?.rol == 'admin'?
+                  <>
+                    <Heading fontSize='20px' textAlign='center'>Panel Administrativo</Heading>
+                    <Link to={Paths.CrudCuenta} >Crud Cuenta</Link>
+                    <Link to={Paths.CrudPerfil} >Crud Perfil</Link>
+                  </>
+                  :
+                  <>
+                    <Heading fontSize='20px' textAlign='center'>Menu</Heading>
+                    <Link to={Paths.Home} >Home</Link>
+                    <Link to='' >Lessons</Link>
+                    <Link to='' >Activities</Link>
+                    <Link to='' >Games</Link>
+                  </>
+                }
+                </VStack>
+        </VStack>
+
     </>
   )
 }

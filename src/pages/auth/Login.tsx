@@ -1,13 +1,15 @@
 import { Box, Button, FormControl, FormLabel, Heading, HStack, Input, Link, Text } from "@chakra-ui/react"
 import { Link as ReactLink } from "react-router-dom"
 import bgLogin from "../../assets/login.jpg"
-import React from "react"
+import React, { useContext } from "react"
 import { Paths } from "../../router/Routes"
 import useApi from "../../shared/hooks/useApi"
+import { UsuarioContext } from "../../shared/contexts/UsuarioContext"
 
 const Login = () => {
 
   const { apiLogin } = useApi()
+  const usuario = useContext(UsuarioContext)
 
   const LogearApi = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -20,7 +22,7 @@ const Login = () => {
         [k: string]: string
       }
 
-       await apiLogin(login, password)
+       await usuario?.Login(login, password)
     }
   }
 

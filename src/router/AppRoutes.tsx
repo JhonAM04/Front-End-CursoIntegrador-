@@ -16,8 +16,12 @@ const AppRoutes = () => {
         <Route element={<AuthOutlet />}>
           <Route element={<NavBarOutlet />} >
             <Route path={Paths.Home} element={<Elements.Home/>} />
-            <Route path={Paths.CrudDocente} element={<Elements.CrudDocente/>} />
             <Route path={Paths.ProfileData} element={<Elements.ProfileData/>} />
+            <Route path={Paths.CrudCuenta} element={<Elements.CrudCuenta/>} />
+            <Route path={Paths.CrudPerfil}>
+              <Route index element={<Elements.CrudPerfil />} />
+              <Route path="perfil/:id" element={<Elements.EditarPerfil />} />
+            </Route>
           </Route>
       </Route>
 
