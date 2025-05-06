@@ -4,6 +4,12 @@ export type sessionvar = {
     token: string
 }
 
+export type account = {
+    id: number
+    login: string
+    password: string
+}
+
 type rol = {
     idRol: number
     rol: string

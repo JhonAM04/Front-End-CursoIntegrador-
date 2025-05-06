@@ -62,6 +62,16 @@ const useApi = () =>{
       return data
     }
 
+    const getAccounts = async(token: string) => {
+      const bd = await fetch('http://localhost:8080/users', {
+        headers: {
+          'Authorization': `Bearer ${token}`}
+      })
+      const data = await bd.json()
+      
+      return data
+    }
+
     const getEmail = async(emailForm: string, formulario: HTMLFormElement)=>{
 
       const bd = await fetch('http://localhost:8080/perfil/', {
@@ -162,7 +172,7 @@ const useApi = () =>{
     }
 
     return{
-        apiLogin, getProfileandAccount, getEmail, editarProfile, crearCuenta, crearPerfil, getAllProfiles
+        apiLogin, getProfileandAccount, getEmail, editarProfile, crearCuenta, crearPerfil, getAllProfiles, getAccounts
     }
 }
 

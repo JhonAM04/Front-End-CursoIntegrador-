@@ -87,11 +87,16 @@ const EditarPerfil = () => {
                   </FormControl>
                   <FormControl>
                   <FormLabel>ID del rol que tendra la cuenta</FormLabel>
-                    <Select name="rolId" placeholder="Seleccione rol" value={rol} onChange={(e) => setRol(Number(e.target.value))}>
-                      <option value= {1} >Docente</option>
-                      <option value= {2}>Estudiante</option>
-                      <option value= {3}>Administrador</option>
-                    </Select>
+                    {
+                      perfil?.rol?.rol == 'admin' ?
+                      <Input name="rolId" type="number" defaultValue={perfil.rol.idRol} readOnly />
+                      :
+                      <Select name="rolId" placeholder="Seleccione rol" value={rol} onChange={(e) => setRol(Number(e.target.value))}>
+                        <option value= {1} >Docente</option>
+                        <option value= {2}>Estudiante</option>
+                        <option value= {3}>Administrador</option>
+                      </Select> 
+                    }
                   </FormControl>
                   <Button type="submit">Guardar cambios</Button>
                 </Box>

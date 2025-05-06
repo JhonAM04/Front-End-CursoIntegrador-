@@ -1,10 +1,13 @@
-import { TableContainer, Table, TableCaption, Thead, Tr, Th, Tbody, Td, Tfoot, useDisclosure } from "@chakra-ui/react"
+import { TableContainer, Table, Thead, Tr, Th, Tbody, Td, useDisclosure } from "@chakra-ui/react"
 import ModalCrud from "../../shared/components/ModalCrud"
 import useApi from "../../shared/hooks/useApi"
+import { useEffect, useState } from "react"
+import { account, sessionvar } from "../../declarations/ApiDeclarations"
 
 const CrudCuenta = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const {crearCuenta} = useApi()
+  const {crearCuenta, getAccounts} = useApi()
+  const [cuentas, setCuentas] = useState<Array<account>>()
 
   const newAccount = async(e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -22,6 +25,19 @@ const CrudCuenta = () => {
 
     }
   }
+
+  const loadData = async() => {
+    if(localStorage.getItem('session')){
+            const sessionAPI: sessionvar = (JSON.parse(localStorage.getItem('session')!))
+            const response = await getAccounts(sessionAPI.token)
+            setCuentas(response)
+            console.log(response)
+          }
+  }
+
+  useEffect(()=>{
+    loadData()
+  },[])
   return (
     <>
       <ModalCrud isOpen={isOpen} onOpen={onOpen} onClose={onClose} title="cuenta" inputs={[
@@ -32,38 +48,25 @@ const CrudCuenta = () => {
        />
         <TableContainer>
       <Table variant='simple'>
-        <TableCaption>Imperial to metric conversion factors</TableCaption>
         <Thead>
           <Tr>
-            <Th>To convert</Th>
-            <Th>into</Th>
-            <Th isNumeric>multiply by</Th>
+            <Th>ID</Th>
+            <Th>Cuenta</Th>
+            <Th>Contraseña</Th>
           </Tr>
         </Thead>
         <Tbody>
-          <Tr>
-            <Td>inches</Td>
-            <Td>millimetres (mm)</Td>
-            <Td isNumeric>25.4</Td>
-          </Tr>
-          <Tr>
-            <Td>feet</Td>
-            <Td>centimetres (cm)</Td>
-            <Td isNumeric>30.48</Td>
-          </Tr>
-          <Tr>
-            <Td>yards</Td>
-            <Td>metres (m)</Td>
-            <Td isNumeric>0.91444</Td>
-          </Tr>
+
+          {
+            cuentas?.map(cuenta => (
+              <Tr>
+                <Td>{cuenta.id}</Td>
+                <Td>{cuenta.login}</Td>
+                <Td>{cuenta.password}</Td>
+              </Tr>
+            ))
+          }
         </Tbody>
-        <Tfoot>
-          <Tr>
-            <Th>To convert</Th>
-            <Th>into</Th>
-            <Th isNumeric>multiply by</Th>
-          </Tr>
-        </Tfoot>
       </Table>
     </TableContainer>
   </>

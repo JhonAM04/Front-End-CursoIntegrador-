@@ -27,12 +27,14 @@ const ProfileData = () => {
 
     if(formulario){
       const data = new FormData(formulario)
-      const {nombre, apellido, dni, sexo, fechanac} = Object.fromEntries(data.entries()) as {
+      const {nombre, apellido, dni, sexo, fechanac, idCuenta, idRol } = Object.fromEntries(data.entries()) as {
         [k: string]: string
       }
       const fechaNacimiento = new Date(fechanac)
       const DNI = Number(dni)
-      await editarProfile(session!.id, session!.token , nombre, apellido, DNI, sexo, fechaNacimiento).then(async()=>{
+      const idCuentaNumber = Number(idCuenta)
+      const idRolNumber = Number(idRol)
+      await editarProfile(session!.id, session!.token , nombre, apellido, DNI, sexo, fechaNacimiento, idCuentaNumber, idRolNumber).then(async()=>{
         await usuario?.getProfile(session!.id, session!.token)
         toast.success('Datos actualizados correctamente')
       }).catch(()=>{
@@ -80,6 +82,14 @@ const ProfileData = () => {
               <FormControl>
                 <FormLabel>Fecha de nacimiento</FormLabel>
                 <Input type="date" name="fechanac" defaultValue={usuario?.profile?.fechanac.toString()} />
+              </FormControl>
+              <FormControl hidden>
+                    <FormLabel>ID de la Cuenta</FormLabel>
+                    <Input type="number" name="idCuenta" defaultValue={usuario?.profile?.usuario?.id} readOnly />
+              </FormControl>
+              <FormControl hidden>
+                <FormLabel>Id del Rol</FormLabel>
+                <Input type="number" name="idRol" defaultValue={usuario?.profile?.rol.idRol} readOnly />
               </FormControl>
               <Button type="submit">Guardar cambios</Button>
             </Box>
