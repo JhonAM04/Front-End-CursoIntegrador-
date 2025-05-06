@@ -154,6 +154,20 @@ const useApi = () =>{
       return data
     }
 
+    const deleteProfile = async(id: number, token: string) => {
+      await fetch(`http://localhost:8080/perfil/${id}`, {
+        method:'DELETE',
+        headers: {'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      }).then(()=>{
+        toast.success('Perfil eliminado correctamente')
+      }).catch(()=>{
+        toast.error('Error al eliminar perfil')
+      })
+      
+    }
+
     const crearCuenta = async(cuenta: string, password: string) =>{
       const bd = await fetch('http://localhost:8080/register', {
         method: 'POST',
@@ -172,7 +186,7 @@ const useApi = () =>{
     }
 
     return{
-        apiLogin, getProfileandAccount, getEmail, editarProfile, crearCuenta, crearPerfil, getAllProfiles, getAccounts
+        apiLogin, getProfileandAccount, getEmail, editarProfile, crearCuenta, crearPerfil, getAllProfiles, getAccounts, deleteProfile
     }
 }
 

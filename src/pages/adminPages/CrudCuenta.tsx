@@ -59,7 +59,7 @@ const CrudCuenta = () => {
 
           {
             cuentas?.map(cuenta => (
-              <Tr>
+              <Tr key={cuenta.id}>
                 <Td>{cuenta.id}</Td>
                 <Td>{cuenta.login}</Td>
                 <Td>{cuenta.password}</Td>

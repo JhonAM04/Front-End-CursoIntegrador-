@@ -1,9 +1,10 @@
 import { VStack, Box, FormControl, FormLabel, Input, Select, Button } from "@chakra-ui/react"
 import useApi from "../../shared/hooks/useApi"
 import { profile, sessionvar } from "../../declarations/ApiDeclarations"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
+import { Paths } from "../../router/Routes"
 
 const EditarPerfil = () => {
 
@@ -13,6 +14,7 @@ const EditarPerfil = () => {
     const [session, setSession] = useState<sessionvar>()
     const [sex, setSex] = useState<'masculino'| 'femenino'>("masculino")
     const [rol, setRol]= useState<number>()
+    const navigate = useNavigate()
 
     const loadPerfil = async() =>{
           if(localStorage.getItem('session')){
@@ -41,6 +43,7 @@ const EditarPerfil = () => {
               await editarProfile(Number(id), session!.token , nombre, apellido, DNI, sexo, fechaNacimiento, idCuentaNumber, rolIdNumber).then(async()=>{
                 await loadPerfil()
                 toast.success('Datos actualizados correctamente')
+                navigate(Paths.CrudPerfil)
               }).catch(()=>{
                 toast.error('Hubo un error')
               })

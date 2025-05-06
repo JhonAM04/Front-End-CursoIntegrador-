@@ -10,7 +10,7 @@ const CrudPerfil = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [session, setSession] = useState<sessionvar>()
     const [perfiles, setPerfiles] = useState<Array<profile>>()
-    const {crearPerfil, getAllProfiles} = useApi()
+    const {crearPerfil, getAllProfiles, deleteProfile} = useApi()
   
     const newPerfil = async(e:React.FormEvent<HTMLFormElement>) => {
       e.preventDefault()
@@ -41,6 +41,11 @@ const CrudPerfil = () => {
         setPerfiles(response)
         console.log(response)
       }
+    }
+
+    const eliminarPerfil = async(id: number, token: string) => {
+      await deleteProfile(id, token)
+      loadPerfiles()
     }
 
     useEffect(()=>{
@@ -96,7 +101,9 @@ const CrudPerfil = () => {
                   <Td >{perfil.usuario.id}</Td>
                   <Td >{perfil.rol.rol}</Td>
                   <Td ><Button as={Link} to={`perfil/${perfil.idPerfil}`}>Editar</Button></Td>
-                  <Td >Eliminar</Td>
+                  <Td ><Button onClick={()=>{
+                    eliminarPerfil(perfil.idPerfil, session?.token!)
+                  }}>Eliminar</Button></Td>
                 </Tr>
               ))
             }

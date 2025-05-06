@@ -3,6 +3,7 @@ import { Elements, Paths } from "./Routes"
 import AuthOutlet from "./Outlets/AuthOutlet"
 import NavBarOutlet from "./Outlets/NavBarOutlet"
 import ProtectLogin from "./Outlets/ProtectLogin"
+import AdminOutlet from "./Outlets/AdminOutlet"
 
 const AppRoutes = () => {
   return (
@@ -17,10 +18,12 @@ const AppRoutes = () => {
           <Route element={<NavBarOutlet />} >
             <Route path={Paths.Home} element={<Elements.Home/>} />
             <Route path={Paths.ProfileData} element={<Elements.ProfileData/>} />
-            <Route path={Paths.CrudCuenta} element={<Elements.CrudCuenta/>} />
-            <Route path={Paths.CrudPerfil}>
-              <Route index element={<Elements.CrudPerfil />} />
-              <Route path="perfil/:id" element={<Elements.EditarPerfil />} />
+            <Route element={<AdminOutlet/>}>
+              <Route path={Paths.CrudCuenta} element={<Elements.CrudCuenta/>} />
+              <Route path={Paths.CrudPerfil}>
+                <Route index element={<Elements.CrudPerfil />} />
+                <Route path="perfil/:id" element={<Elements.EditarPerfil />} />
+              </Route>
             </Route>
           </Route>
       </Route>
