@@ -45,7 +45,7 @@ const CrudPerfil = () => {
         setCuentasSP(
           response2.map(c => ({
             value: c.id,
-            label: `${c.id}`
+            label: `${c.id} - ${c.login}`
           }))
         )
         console.log(response2)

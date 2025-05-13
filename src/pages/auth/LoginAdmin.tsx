@@ -1,7 +1,9 @@
-import { HStack, Box, Heading, FormControl, FormLabel, Input, Button } from "@chakra-ui/react"
+import { HStack, Box, Heading, FormControl, FormLabel, Input, Button, Image } from "@chakra-ui/react"
 import { useContext } from "react"
 import { UsuarioContext } from "../../shared/contexts/UsuarioContext"
-import bgLogin from "../../assets/login.jpg"
+import object1 from "../../assets/objectAdmin.mp4"
+import logo from "../../assets/icono.jpg"
+
 
 const LoginAdmin = () => {
   const usuario = useContext(UsuarioContext)
@@ -24,10 +26,17 @@ const LoginAdmin = () => {
 
   return (
     <>
-      <HStack w='100vw' h='100vh' justifyContent='center' bgImage={bgLogin} bgPosition='center' bgRepeat='no-repeat' bgSize='cover' bgColor='#2B8687'>
-
-            <Box as="form" onSubmit={LogearApi} display='flex' flexDirection='column' justifyContent='center' gap='1em' bgColor='whiteAlpha.700' boxShadow='0px 0px 10px 20px rgba(255, 255, 255, 0.26)' w='300px' h='400px' p='1em' borderRadius='10px'>
-              <Heading mb='2px'>Login Admin</Heading>
+      <HStack w='100vw' h='100vh' justifyContent='space-evenly' bgPosition='center' bgRepeat='no-repeat' bgSize='cover' bgColor='white'>
+            <video autoPlay loop muted height='860px' width='860px'>
+              <source src={object1} />
+            </video>
+            <Box as="form" onSubmit={LogearApi} display='flex' flexDirection='column' justifyContent='center' gap='1em' bgColor='whiteAlpha.700' boxShadow='0px 0px 10px 20px rgba(255, 255, 255, 0.26)' w='300px' h='500px' p='1em' borderRadius='10px' mr='100px'>
+              <Box display='flex' justifyContent='center'>
+                <Image src={logo} boxSize='150px' />
+              </Box>
+              <Box display='flex' justifyContent='center'>
+                <Heading mb='2px'>Login Admin</Heading>
+              </Box>
               <FormControl>
                 <FormLabel>Usuario: </FormLabel>
                 <Input type="email" name="login" focusBorderColor="#2B8687" borderColor='#2B8687' required />

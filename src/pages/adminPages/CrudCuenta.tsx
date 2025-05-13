@@ -21,7 +21,9 @@ const CrudCuenta = () => {
         [k: string]: string
       }
   
-      await crearCuenta(cuenta, contraseña)
+      await crearCuenta(cuenta, contraseña).then(async()=>{
+        await loadData()
+      })
 
     }
   }

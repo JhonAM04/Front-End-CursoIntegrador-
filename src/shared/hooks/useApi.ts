@@ -205,10 +205,10 @@ const useApi = () =>{
         })
       })
       const response = await bd.json().then((respuesta)=>{
-        toast.success('exito CON UP')
+        toast.success('Contraseña restablecida con exito')
         console.log(respuesta)
       }).catch((respuesta)=>{
-        toast.error('Error con up ')
+        toast.error('Hubo un error al restablecer contraseña ')
         console.log(respuesta)
       })
       return response
