@@ -1,4 +1,4 @@
-import { TableContainer, Table, Thead, Tr, Th, Tbody, Td, useDisclosure } from "@chakra-ui/react"
+import { TableContainer, Table, Thead, Tr, Th, Tbody, Td, useDisclosure, Box } from "@chakra-ui/react"
 import ModalCrud from "../../shared/components/ModalCrud"
 import useApi from "../../shared/hooks/useApi"
 import { useEffect, useState } from "react"
@@ -44,31 +44,33 @@ const CrudCuenta = () => {
         { name: 'cuenta', label:'cuenta', type:'email'},
         { name: 'contraseña', label:'contraseña', type:'password'}
         ]}
-        onSubmit={newAccount}
+        onSubmit={newAccount} 
        />
+       <Box bgColor='white' p='2em' borderRadius='10px' mt='10px'>
         <TableContainer>
-      <Table variant='simple'>
-        <Thead>
-          <Tr>
-            <Th>ID</Th>
-            <Th>Cuenta</Th>
-            <Th>Contraseña</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
+            <Table variant='simple'>
+              <Thead bgColor='blackAlpha.800'>
+                <Tr>
+                  <Th color='white'>ID</Th>
+                  <Th color='white'>Cuenta</Th>
+                  <Th color='white'>Contraseña</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
 
-          {
-            cuentas?.map(cuenta => (
-              <Tr key={cuenta.id}>
-                <Td>{cuenta.id}</Td>
-                <Td>{cuenta.login}</Td>
-                <Td>{cuenta.password}</Td>
-              </Tr>
-            ))
-          }
-        </Tbody>
-      </Table>
-    </TableContainer>
+                {
+                  cuentas?.map(cuenta => (
+                    <Tr key={cuenta.id}>
+                      <Td>{cuenta.id}</Td>
+                      <Td>{cuenta.login}</Td>
+                      <Td>{cuenta.password}</Td>
+                    </Tr>
+                  ))
+                }
+              </Tbody>
+            </Table>
+         </TableContainer>
+    </Box>
   </>
   )
 }

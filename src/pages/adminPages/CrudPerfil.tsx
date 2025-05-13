@@ -1,4 +1,4 @@
-import { TableContainer, Table, Thead, Tr, Th, Tbody, Td, useDisclosure, Button } from "@chakra-ui/react"
+import { TableContainer, Table, Thead, Tr, Th, Tbody, Td, useDisclosure, Button, Box } from "@chakra-ui/react"
 import ModalCrud from "../../shared/components/ModalCrud"
 import useApi from "../../shared/hooks/useApi"
 import { useEffect, useState } from "react"
@@ -10,7 +10,8 @@ const CrudPerfil = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [session, setSession] = useState<sessionvar>()
     const [perfiles, setPerfiles] = useState<Array<profile>>()
-    const {crearPerfil, getAllProfiles, deleteProfile} = useApi()
+    const [cuentasSP, setCuentasSP] = useState<{ value: number; label: string }[]>([])
+    const {crearPerfil, getAllProfiles, deleteProfile, getProfilesWhitoutAccount} = useApi()
   
     const newPerfil = async(e:React.FormEvent<HTMLFormElement>) => {
       e.preventDefault()
@@ -40,6 +41,14 @@ const CrudPerfil = () => {
         const response = await getAllProfiles(sessionAPI.token)
         setPerfiles(response)
         console.log(response)
+        const response2: Array<sessionvar> = await getProfilesWhitoutAccount(sessionAPI.token)
+        setCuentasSP(
+          response2.map(c => ({
+            value: c.id,
+            label: `${c.id}`
+          }))
+        )
+        console.log(response2)
       }
     }
 
@@ -63,7 +72,7 @@ const CrudPerfil = () => {
           {value: 'femenino', label:'femenino'}
         ]},
         {name:'fechanac', label:'Fecha de nacimiento', type:'Date'},
-        {name:'cuentaId', label:'Id de la cuenta', type:'number'},
+        {name:'cuentaId', label:'Id de la cuenta', type:'select', options:cuentasSP},
         {name:'rolId', label:'Id del rol que tendra la cuenta', type:'select', options:[
           {value: 1 , label:'Docente'},
           {value: 2 , label:'Estudiante'},
@@ -72,44 +81,46 @@ const CrudPerfil = () => {
         ]}
         onSubmit={newPerfil}
        />
+       <Box bgColor='white' p='2em' borderRadius='10px' mt='10px'>
         <TableContainer>
-      <Table variant='simple'>
-        <Thead>
-          <Tr>
-            <Th>ID Perfil</Th>
-            <Th>Nombre</Th>
-            <Th>Apellido</Th>
-            <Th>DNI</Th>
-            <Th>Sexo</Th>
-            <Th>Fecha de nacimiento</Th>
-            <Th>ID de la cuenta</Th>
-            <Th>ID del rol</Th>
-            <Th>Editar</Th>
-            <Th>Eliminar</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-            {
-              perfiles?.map(perfil => (
-                <Tr key={perfil.idPerfil}>
-                  <Td>{perfil.idPerfil}</Td>
-                  <Td>{perfil.nombre}</Td>
-                  <Td >{perfil.apellido}</Td>
-                  <Td >{perfil.dni}</Td>
-                  <Td >{perfil.sexo}</Td>
-                  <Td >{perfil.fechanac.toString()}</Td>
-                  <Td >{perfil.usuario.id}</Td>
-                  <Td >{perfil.rol.rol}</Td>
-                  <Td ><Button as={Link} to={`perfil/${perfil.idPerfil}`}>Editar</Button></Td>
-                  <Td ><Button onClick={()=>{
-                    eliminarPerfil(perfil.idPerfil, session?.token!)
-                  }}>Eliminar</Button></Td>
+            <Table variant='simple'>
+              <Thead bgColor='blackAlpha.800'>
+                <Tr>
+                  <Th color='white'>ID Perfil</Th>
+                  <Th color='white'>Nombre</Th>
+                  <Th color='white'>Apellido</Th>
+                  <Th color='white'>DNI</Th>
+                  <Th color='white'>Sexo</Th>
+                  <Th color='white'>Fecha de nacimiento</Th>
+                  <Th color='white'>ID de la cuenta</Th>
+                  <Th color='white'>ID del rol</Th>
+                  <Th color='white'>Editar</Th>
+                  <Th color='white'>Eliminar</Th>
                 </Tr>
-              ))
-            }
-        </Tbody>
-      </Table>
-    </TableContainer>
+              </Thead>
+              <Tbody>
+                  {
+                    perfiles?.map(perfil => (
+                      <Tr key={perfil.idPerfil}>
+                        <Td>{perfil.idPerfil}</Td>
+                        <Td>{perfil.nombre}</Td>
+                        <Td >{perfil.apellido}</Td>
+                        <Td >{perfil.dni}</Td>
+                        <Td >{perfil.sexo}</Td>
+                        <Td >{perfil.fechanac.toString()}</Td>
+                        <Td >{perfil.usuario.id}</Td>
+                        <Td >{perfil.rol.rol}</Td>
+                        <Td ><Button as={Link} to={`perfil/${perfil.idPerfil}`} colorScheme="yellow">Editar</Button></Td>
+                        <Td ><Button onClick={()=>{
+                          eliminarPerfil(perfil.idPerfil, session?.token!)
+                        }} colorScheme="red">Eliminar</Button></Td>
+                      </Tr>
+                    ))
+                  }
+              </Tbody>
+            </Table>
+          </TableContainer>
+    </Box>
   </>
   )
 }

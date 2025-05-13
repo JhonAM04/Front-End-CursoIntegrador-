@@ -11,13 +11,19 @@ const AppRoutes = () => {
 
       <Route element={<ProtectLogin />} >
         <Route path={Paths.Login} element={<Elements.Login/>} />
+        <Route path={Paths.LoginAdmin} element={<Elements.LoginAdmin/>} />
         <Route path={Paths.ForgotenPassword} element={<Elements.ForgotenPassword/>} />
+        <Route path={Paths.PagePassword} element={<Elements.PagePassword/>} />
       </Route>
       
         <Route element={<AuthOutlet />}>
           <Route element={<NavBarOutlet />} >
             <Route path={Paths.Home} element={<Elements.Home/>} />
             <Route path={Paths.ProfileData} element={<Elements.ProfileData/>} />
+            <Route path={Paths.Lessons} element={<Elements.Lessons/>} />
+            <Route path={Paths.Activities} element={<Elements.Activities/>} />
+
+
             <Route element={<AdminOutlet/>}>
               <Route path={Paths.CrudCuenta} element={<Elements.CrudCuenta/>} />
               <Route path={Paths.CrudPerfil}>

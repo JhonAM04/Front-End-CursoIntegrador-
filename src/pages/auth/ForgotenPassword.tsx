@@ -17,7 +17,7 @@ const ForgotenPassword = () => {
       [k: string]: string
     }
     
-    await getEmail(email, formulario)
+    await getEmail(email)
 
   }
 

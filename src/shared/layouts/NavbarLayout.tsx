@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react"
+import { Box, Grid, GridItem } from "@chakra-ui/react"
 import { ReactElement } from "react"
 import NavBar from "../components/NavBar"
 import UserNav from "../components/UserNav"
@@ -18,13 +18,34 @@ const NavbarLayout = ({children} : {
       />
 
       {/* Contenido con margen interno */}
-      <Box w="100%" minH='100vh' p="1.5em" >
+      <Grid
+      templateColumns={{ base: "1fr", md: "220px 1fr" }}
+      templateRows="auto 1fr"
+      minH="100vh"
+      p="1.5em"
+      gap="1em"
+    >
+      {/* NavBar a la izquierda */}
+      <GridItem
+        as="aside"
+        rowSpan={2}
+        colSpan={{ base: 1, md: 1 }}
+        display={{ base: "none", md: "block" }} // Ocultar en mobile si deseas
+        overflow="hidden"
+      >
         <NavBar />
-        <Box pl="220px">
-          <UserNav />
-          {children}
-        </Box>
-      </Box>
+      </GridItem>
+
+      {/* UserNav arriba a la derecha */}
+      <GridItem as="header" colSpan={1}>
+        <UserNav />
+      </GridItem>
+
+      {/* Contenido principal debajo del UserNav */}
+      <GridItem as="main" colSpan={1}>
+        {children}
+      </GridItem>
+    </Grid>
     </>
   )
 }

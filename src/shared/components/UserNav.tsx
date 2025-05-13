@@ -21,7 +21,7 @@ const UserNav = () => {
   return (
     <HStack justifyContent='right' alignItems='center' w='100%' mb='1em'>
         <Menu>
-                <MenuButton as={Button} colorScheme='pink'>
+                <MenuButton as={Button} colorScheme='teal'>
                   {usuario?.profile?.nombre} {usuario?.profile?.apellido}
                 </MenuButton>
                 <MenuList>

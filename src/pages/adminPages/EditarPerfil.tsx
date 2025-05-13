@@ -20,9 +20,13 @@ const EditarPerfil = () => {
           if(localStorage.getItem('session')){
             const sessionAPI: sessionvar = (JSON.parse(localStorage.getItem('session')!))
             const response = await getProfileandAccount(Number(id), sessionAPI.token)
-            setPerfil(response)
-            setSex((response as profile).sexo)
-            setRol((response as profile).rol.idRol)
+            if(!response){
+              navigate(Paths.CrudPerfil)
+            }else{
+              setPerfil(response)
+              setSex((response as profile).sexo)
+              setRol((response as profile).rol.idRol)
+            }
           }
         }
 
@@ -55,7 +59,7 @@ const EditarPerfil = () => {
         loadPerfil()
     },[])
   return (
-    <VStack justifyContent='center' alignItems='center' w='100%' h='100vh' >
+    <VStack justifyContent='center' alignItems='center' w='100%' h='95vh' >
               <Box as='form' onSubmit={edit}>
                   <FormControl>
                     <FormLabel>ID</FormLabel>

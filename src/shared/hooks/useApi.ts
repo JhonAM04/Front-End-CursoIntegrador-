@@ -1,7 +1,6 @@
 
 import { toast } from "sonner"
 import { profile } from "../../declarations/ApiDeclarations"
-import emailjs from '@emailjs/browser'
 import { useNavigate } from "react-router-dom"
 import { Paths } from "../../router/Routes"
 
@@ -46,7 +45,7 @@ const useApi = () =>{
       })
       const data = await bd.json()
       
-      const profile = data.find((profile: profile)=> profile.usuario.id == id)
+      const profile = data.find((profile: profile)=> profile.idPerfil == id)
       
       return profile
       
@@ -72,28 +71,39 @@ const useApi = () =>{
       return data
     }
 
-    const getEmail = async(emailForm: string, formulario: HTMLFormElement)=>{
+    const getEmail = async(emailForm: string)=>{
 
-      const bd = await fetch('http://localhost:8080/perfil/', {
-        headers: {
-          'Authorization': `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnYW1lcmpob25jZW5hMTY3QGdtYWlsLmNvbSIsImV4cCI6MTc0NDY5ODIxOCwiaWF0IjoxNzQ0Njk0NjE4fQ.knQjBHWhaHOKinT0eC7wRX6LcM7-6yeLQnHll6J3sUg"}`}
-      })
+      const bd = await fetch('http://localhost:8080/perfil/correo')
       const data = await bd.json()
       
       const email = data.find((profile: profile) => profile.usuario.login == emailForm)
+      const correo:profile =email
 
-      if (email) {
+
+      if (correo) {
         try {
-          await emailjs.sendForm('service_p0q1ki3', 'template_eprvbdn', formulario, {
-            publicKey: 'Pxpx4XuTKkaND45n1'
-          });
-          toast.success('Se envió el correo de recuperación exitosamente');
+
+          console.log(correo.usuario.login)
+          await fetch(`http://localhost:8080/api/password/request?email=${correo.usuario.login}`, {
+            method: 'POST',
+        headers:{'Content-type': 'application/json'} ,
+        body: JSON.stringify({
+          id: correo.usuario.id,
+          
+
+        })
+          }).then(()=>{
+            toast.success('Funciono el metodo')
+          }).catch(()=>{toast.error("Fallo el metodo")})
+          
+
+          
         } catch (error) {
           toast.error('Hubo un error al enviar el correo');
           console.log(error);
         }
       } else {
-        toast.error('Este correo electrónico no existe');
+        toast.error('Este correo electrÃ³nico no existe');
       }
       
       return email
@@ -185,8 +195,37 @@ const useApi = () =>{
       return response
     }
 
+    const updatePassword = async(token:string,password:string) =>{
+      const bd = await fetch(`http://localhost:8080/api/password/reset?token=${token}`, {
+        method: 'POST',
+        headers:{'Content-type': 'application/json'} ,
+        body: JSON.stringify({
+          newpassword: password,
+
+        })
+      })
+      const response = await bd.json().then((respuesta)=>{
+        toast.success('exito CON UP')
+        console.log(respuesta)
+      }).catch((respuesta)=>{
+        toast.error('Error con up ')
+        console.log(respuesta)
+      })
+      return response
+    }
+
+    const getProfilesWhitoutAccount = async(token: string) => {
+        const bd = await fetch('http://localhost:8080/usersperfil',{
+          method: 'GET',
+          headers:{'Authorization': `Bearer ${token}`}
+        })
+        const response = await bd.json()
+
+        return response
+    }
+
     return{
-        apiLogin, getProfileandAccount, getEmail, editarProfile, crearCuenta, crearPerfil, getAllProfiles, getAccounts, deleteProfile
+        apiLogin, getProfileandAccount, getEmail, editarProfile, crearCuenta, crearPerfil, getAllProfiles, getAccounts, deleteProfile, updatePassword, getProfilesWhitoutAccount
     }
 }
 

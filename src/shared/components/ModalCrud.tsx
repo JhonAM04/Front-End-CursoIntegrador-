@@ -23,7 +23,7 @@ type InputField = {
   
     return (
       <>
-        <Button onClick={onOpen}>Crear {title}</Button>
+        <Button onClick={onOpen} colorScheme="blue">Crear {title}</Button>
   
         <Modal
           initialFocusRef={initialRef}

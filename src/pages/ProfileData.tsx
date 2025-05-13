@@ -91,7 +91,7 @@ const ProfileData = () => {
                 <FormLabel>Id del Rol</FormLabel>
                 <Input type="number" name="idRol" defaultValue={usuario?.profile?.rol.idRol} readOnly />
               </FormControl>
-              <Button type="submit">Guardar cambios</Button>
+              <Button type="submit" colorScheme="teal">Guardar cambios</Button>
             </Box>
         </VStack>
       </HStack>
