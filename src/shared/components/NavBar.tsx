@@ -35,7 +35,7 @@ const NavBar = () => {
                     </Box>
                     <Link to={Paths.Home} >Home</Link>
                     <Link to={Paths.Lessons} >Lessons</Link>
-                    <Link to={Paths.Activities} >Activities</Link>
+                    <Link to={Paths.Speaking} >Activities</Link>
                   </>
                 }
                 </VStack>

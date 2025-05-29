@@ -12,7 +12,11 @@ export const Elements = {
     EditarPerfil: lazy(()=> import("../pages/adminPages/EditarPerfil")),
     PagePassword: lazy(()=> import("../pages/auth/PagePassword")),
     Lessons: lazy(()=> import("../pages/Lessons")),
-    Activities: lazy(()=> import("../pages/Activities"))
+    Activities: lazy(()=> import("../pages/Activities")),
+    Speaking: lazy(()=> import("../pages/Speaking")),
+    Modules: lazy(()=> import("../pages/Modules")),
+
+
 
 }
 
@@ -26,6 +30,8 @@ export const Paths = {
     CrudPerfil: '/crudPerfil',
     PagePassword: '/changepass',
     Lessons: '/lessons',
-    Activities: '/activities'
+    Activities: '/activities',
+    Speaking:"/speaking",
+    Modules:"/modules"
 
 }

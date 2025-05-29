@@ -224,6 +224,16 @@ const useApi = () =>{
         return response
     }
 
+    const getAllModule = async(token: string) => {
+      const bd = await fetch('http://localhost:8080/module/', {
+        headers: {
+          'Authorization': `Bearer ${token}`}
+      })
+      const data = await bd.json()
+      
+      return data
+    }
+
     return{
         apiLogin, getProfileandAccount, getEmail, editarProfile, crearCuenta, crearPerfil, getAllProfiles, getAccounts, deleteProfile, updatePassword, getProfilesWhitoutAccount
     }

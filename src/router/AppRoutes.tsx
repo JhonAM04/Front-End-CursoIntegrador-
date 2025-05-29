@@ -21,7 +21,8 @@ const AppRoutes = () => {
             <Route path={Paths.Home} element={<Elements.Home/>} />
             <Route path={Paths.ProfileData} element={<Elements.ProfileData/>} />
             <Route path={Paths.Lessons} element={<Elements.Lessons/>} />
-            <Route path={Paths.Activities} element={<Elements.Activities/>} />
+            <Route path={Paths.Speaking} element={<Elements.Speaking/>} />
+            <Route path={Paths.Modules} element={<Elements.Modules/>} />
 
 
             <Route element={<AdminOutlet/>}>
