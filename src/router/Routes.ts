@@ -12,7 +12,8 @@ export const Elements = {
     EditarPerfil: lazy(()=> import("../pages/adminPages/EditarPerfil")),
     PagePassword: lazy(()=> import("../pages/auth/PagePassword")),
     Lessons: lazy(()=> import("../pages/Lessons")),
-    Activities: lazy(()=> import("../pages/Activities"))
+    Activities: lazy(()=> import("../pages/Activities")),
+    Activitie: lazy(()=> import("../pages/Activitie"))
 
 }
 
@@ -27,5 +28,4 @@ export const Paths = {
     PagePassword: '/changepass',
     Lessons: '/lessons',
     Activities: '/activities'
-
 }

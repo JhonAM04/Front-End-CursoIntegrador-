@@ -4,6 +4,7 @@ import logo from "../../assets/logo.jpeg"
 import { useContext } from "react"
 import { UsuarioContext } from "../contexts/UsuarioContext"
 import { Paths } from "../../router/Routes"
+import mascota from "../../assets/capibara.gif"
 
 const NavBar = () => {
   const usuario = useContext(UsuarioContext)
@@ -12,7 +13,7 @@ const NavBar = () => {
     <>
       
 
-        <VStack alignItems='flex-start'  gap='1em' p='1em'  height='95vh' w='200px' bgColor='#2b8687' boxShadow='dark-lg' color='white'  position='fixed' zIndex='999' borderRadius='20px' >
+        <VStack alignItems='flex-start'  gap='1em' p='1em'  height='95vh' w='200px' bgColor='#2b8687' boxShadow='dark-lg' color='white' borderRadius='20px' >
             
                 <Box display='flex' alignItems='center' justifyContent='center' mb='50px' w='100%'>
                   <Image src={logo} boxSize='120px' />
@@ -39,6 +40,8 @@ const NavBar = () => {
                   </>
                 }
                 </VStack>
+
+                <Image src={mascota} boxSize='150px' mt='180px' />
         </VStack>
 
     </>

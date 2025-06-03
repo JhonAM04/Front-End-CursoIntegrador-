@@ -12,12 +12,7 @@ const ProfileData = () => {
   const [sex, setSex] = useState<'masculino'| 'femenino'>("masculino")
   const [session, setSession] = useState<sessionvar>()
 
-  
-  
-  
-
   const { editarProfile  } = useApi()
-
 
 
   const edit = async(e:React.FormEvent<HTMLFormElement>) => {
@@ -34,7 +29,7 @@ const ProfileData = () => {
       const DNI = Number(dni)
       const idCuentaNumber = Number(idCuenta)
       const idRolNumber = Number(idRol)
-      await editarProfile(session!.id, session!.token , nombre, apellido, DNI, sexo, fechaNacimiento, idCuentaNumber, idRolNumber).then(async()=>{
+      await editarProfile(usuario?.profile?.idPerfil!, session!.token , nombre, apellido, DNI, sexo, fechaNacimiento, idCuentaNumber, idRolNumber).then(async()=>{
         await usuario?.getProfile(session!.id, session!.token)
         toast.success('Datos actualizados correctamente')
       }).catch(()=>{
@@ -81,7 +76,7 @@ const ProfileData = () => {
               </FormControl>
               <FormControl>
                 <FormLabel>Fecha de nacimiento</FormLabel>
-                <Input type="date" name="fechanac" defaultValue={usuario?.profile?.fechanac.toString()} />
+                <Input type="date" name="fechanac" defaultValue={usuario?.profile?.fechanac} />
               </FormControl>
               <FormControl hidden>
                     <FormLabel>ID de la Cuenta</FormLabel>

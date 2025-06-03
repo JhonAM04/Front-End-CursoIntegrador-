@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react"
+import { Box, Flex, Show } from "@chakra-ui/react"
 import { ReactElement } from "react"
 import NavBar from "../components/NavBar"
 import UserNav from "../components/UserNav"
@@ -8,22 +8,21 @@ const NavbarLayout = ({children} : {
 }) => {
   return (
     <>
-      {/* Fondo que se mantiene al hacer scroll */}
-      <Box
-        position="fixed"
-        w="100vw"
-        h="100vh"
-        bgColor='#f2f2f2'
-        zIndex={-1}
-      />
+      <Flex w="100%" minH='100vh' p="1.5em" bgColor='#f2f2f2' >
 
-      <Box w="100%" minH='100vh' p="1.5em" >
-        <NavBar />
-        <Box pl="220px">
+        <Show above="lg">
+          <Box position='relative' h='100vh' mr='220px'>
+            <Box position='fixed'>
+              <NavBar />
+            </Box>
+          </Box>
+        </Show>
+
+        <Box w='100%'>
           <UserNav />
           {children}
         </Box>
-      </Box>
+      </Flex>
     </>
   )
 }

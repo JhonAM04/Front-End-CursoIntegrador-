@@ -224,8 +224,40 @@ const useApi = () =>{
         return response
     }
 
+    const getActivities = async(token: string) => {
+      const bd = await fetch('http://localhost:8080/actividad/',{
+        method: 'GET',
+        headers: {'Authorization': `Bearer ${token}`}
+      })
+
+      const response = await bd.json()
+      return response
+    }
+
+    const getModules = async(token: string) => {
+      const bd = await fetch('http://localhost:8080/modulo/',{
+        method: 'GET',
+        headers: {'Authorization': `Bearer ${token}`}
+      })
+
+      const response = await bd.json()
+      return response
+    }
+
+    const getLessons = async(token: string) => {
+      const bd = await fetch('http://localhost:8080/leccion/',{
+        method: 'GET',
+        headers: {'Authorization': `Bearer ${token}`}
+      })
+
+      const response = await bd.json()
+      return response
+    }
+
+
+
     return{
-        apiLogin, getProfileandAccount, getEmail, editarProfile, crearCuenta, crearPerfil, getAllProfiles, getAccounts, deleteProfile, updatePassword, getProfilesWhitoutAccount
+        apiLogin, getProfileandAccount, getEmail, editarProfile, crearCuenta, crearPerfil, getAllProfiles, getAccounts, deleteProfile, updatePassword, getProfilesWhitoutAccount, getActivities, getModules, getLessons
     }
 }
 

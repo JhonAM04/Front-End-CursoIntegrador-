@@ -26,3 +26,28 @@ export type profile = {
     rol : rol
     usuario: sessionvar
 }
+
+export type activitie = {
+    idActividad: number
+    descripcion: string
+    tipo: number
+    titulo: string
+    modulo: modules
+}
+
+export type lesson = {
+    idLeccion: number
+    titulo: string
+    descripcion: string
+    leccion: string
+    tipo: string
+    modulo: modules
+}
+
+export type modules = {
+    idModulo: number
+    descripcion: string
+    modulo: string
+    orden: number
+    idGrado: number
+}
