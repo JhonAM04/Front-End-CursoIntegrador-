@@ -1,9 +1,11 @@
-import { Box, Button, Divider, FormControl, FormLabel, Heading, HStack, Input, Select, VStack } from "@chakra-ui/react"
+import { Box, Button, FormControl, FormLabel, Image, Input, Select, VStack } from "@chakra-ui/react"
 import { useContext, useEffect, useState } from "react"
 import useApi from "../shared/hooks/useApi"
 import { toast } from "sonner"
 import { UsuarioContext } from "../shared/contexts/UsuarioContext"
 import { sessionvar } from "../declarations/ApiDeclarations"
+import capibaraProfile from '../assets/capibaraPerfil.png'
+import bgFondo from '../assets/fondoPerfil.png'
 
 const ProfileData = () => {
 
@@ -47,14 +49,18 @@ const ProfileData = () => {
   },[])
 
   return (
-    <VStack justifyContent='center' alignItems='center' w='100%' h='100vh' >
-      <HStack gap='2em' h='fit-content'>
-        <Box h='100%' display='flex' gap='1em'>
-          <Heading>PERFIL</Heading>
-          <Divider orientation='vertical'/>
-        </Box>
-        <VStack>
-          <Box as='form' onSubmit={edit}>
+    <VStack justifyContent='center' alignItems='center'  w='100%' h='100vh' bgImage={bgFondo} bgPosition='center' bgSize='cover' bgRepeat='no-repeat' borderRadius='10px'  >
+      <Box position="relative">  {/* <- NUEVO */}
+          <Image 
+            src={capibaraProfile} 
+            boxSize='150px' 
+            position='absolute' 
+            top='-125px'   // la mitad del tamaño de la imagen para que se superponga
+            left='50%'
+            transform='translateX(-50%)'
+            zIndex={1}
+          />
+          <Box display='flex' flexDirection='column' gap='1em' as='form' onSubmit={edit} border='2px' borderRadius='10px' p='70px' w='450px' borderColor='teal'>
               <FormControl>
                 <FormLabel>Nombre</FormLabel>
                 <Input type="text" name="nombre" defaultValue={usuario?.profile?.nombre} />
@@ -88,8 +94,7 @@ const ProfileData = () => {
               </FormControl>
               <Button type="submit" colorScheme="teal">Guardar cambios</Button>
             </Box>
-        </VStack>
-      </HStack>
+          </Box>
     </VStack>
   )
   }

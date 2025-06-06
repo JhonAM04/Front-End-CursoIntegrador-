@@ -20,7 +20,12 @@ const AppRoutes = () => {
           <Route element={<NavBarOutlet />} >
             <Route path={Paths.Home} element={<Elements.Home/>} />
             <Route path={Paths.ProfileData} element={<Elements.ProfileData/>} />
-            <Route path={Paths.Lessons} element={<Elements.Lessons/>} />
+
+            <Route path={Paths.Lessons}>
+              <Route index element={<Elements.Lessons/>} />
+              <Route path="lesson/:id" element={<Elements.Lesson/>} />
+            </Route>
+            
             <Route path={Paths.Activities}>
               <Route index element={<Elements.Activities/>} />
               <Route path="activitie/:id" element={<Elements.Activitie/>} />

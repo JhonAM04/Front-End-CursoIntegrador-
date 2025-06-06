@@ -37,6 +37,7 @@ const LessonsCard = ({less, color}:{less: lesson, color: string}) => {
                         padding='10px'
                         animation={"floatWobble 3s ease-in-out infinite"}
                         as={Link}
+                        to={`lesson/${less.idLeccion}`}
                         bg={color}
                         mb='20px'
                         >

@@ -264,10 +264,20 @@ const useApi = () =>{
       return response
     }
 
+    const getLesson = async(token: string, id: number) => {
+      const bd = await fetch(`http://localhost:8080/leccion/${id}`,{
+        method: 'GET',
+        headers: {'Authorization': `Bearer ${token}`}
+      })
+
+      const response = await bd.json()
+      return response
+    }
+
 
 
     return{
-        apiLogin, getProfileandAccount, getEmail, editarProfile, crearCuenta, crearPerfil, getAllProfiles, getAccounts, deleteProfile, updatePassword, getProfilesWhitoutAccount, getActivities, getModules, getLessons, getActivitie
+        apiLogin, getProfileandAccount, getEmail, editarProfile, crearCuenta, crearPerfil, getAllProfiles, getAccounts, deleteProfile, updatePassword, getProfilesWhitoutAccount, getActivities, getModules, getLessons, getActivitie, getLesson
     }
 }
 

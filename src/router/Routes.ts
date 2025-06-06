@@ -13,8 +13,8 @@ export const Elements = {
     PagePassword: lazy(()=> import("../pages/auth/PagePassword")),
     Lessons: lazy(()=> import("../pages/Lessons")),
     Activities: lazy(()=> import("../pages/Activities")),
-    Activitie: lazy(()=> import("../pages/Activitie"))
-
+    Activitie: lazy(()=> import("../pages/Activitie")),
+    Lesson: lazy(()=> import("../pages/Lesson"))
 }
 
 export const Paths = {
