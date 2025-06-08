@@ -51,3 +51,30 @@ export type modules = {
     orden: number
     idGrado: number
 }
+
+export type question = {
+    idPregunta: number
+    enunciado: string
+    orden: number
+    respuestaCorrecta: string
+    tipoPregunta: string
+    actividad: activitie
+}
+
+type opciones = {
+    textoOpcion: string
+    esCorrecta: boolean
+}
+
+type preguntas = {
+    id: number
+    texto: string
+    opciones: Array<opciones>
+}
+
+export type enunciado = {
+    id: number
+    enunciado: string
+    tipoPregunta: string
+    preguntas: Array<preguntas>
+}
