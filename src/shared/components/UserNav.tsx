@@ -19,7 +19,7 @@ const UserNav = () => {
       }
 
   return (
-    <HStack justifyContent='right' alignItems='center' w='100%' mb='1em'>
+    <HStack justifyContent='right' alignItems='center' w='100%' mb='1em' id="profile-section">
         <Menu>
                 <MenuButton as={Button} colorScheme='teal'>
                   {usuario?.profile?.nombre} {usuario?.profile?.apellido}

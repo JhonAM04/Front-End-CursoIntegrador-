@@ -78,3 +78,9 @@ export type enunciado = {
     tipoPregunta: string
     preguntas: Array<preguntas>
 }
+
+export type speaking  = {
+    idSpeaking: number
+    img: string
+    respuesta: string
+}

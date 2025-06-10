@@ -1,11 +1,11 @@
-import { Box, Heading, HStack, Image, SimpleGrid, Text, VStack } from "@chakra-ui/react"
-import icon1 from '../assets/objeto1_Lessons.png'
-import icon2 from '../assets/objeto2_Lessons.png'
+import { Image, SimpleGrid, VStack } from "@chakra-ui/react"
 import LessonsCard from "../shared/components/LessonsCard"
 import { useState, useEffect } from "react"
 import { lesson, modules, sessionvar } from "../declarations/ApiDeclarations"
 import useApi from "../shared/hooks/useApi"
 import ModuleLessonCard from "../shared/components/ModuleLessonCard"
+import banner from '../assets/bannerLess.jpeg'
+
 
 const Lessons = () => {
   const { getModules, getLessons } = useApi()
@@ -35,22 +35,9 @@ const Lessons = () => {
 
   return (
     <>
-      <Box bgGradient='linear(to-t, blue.500, teal.500 80%)' h='300px' p='2em' borderRadius='10px' mb={10}>
-        <HStack justifyContent='space-evenly' alignItems='center'>
-          <Image src={icon1} boxSize='200px' />
-          <VStack w='fit-content' textAlign='center' gap='2em'>
-            <Heading fontSize='25px' maxW='700px'>
-              WELCOME TO THE WILLIAM SHACKESPEARE SCHOOL VIRTUAL ENGLISH CLASSROOM!!!
-            </Heading>
-            <Text maxW='510px' fontSize='18px'>
-              Here you will find interactive resources, personalized exercises, reading materials, and tools to support you in your English learning
-            </Text>
-          </VStack>
-          <Image src={icon2} boxSize='200px' />
-        </HStack>
-      </Box>
+      <Image src={banner} borderRadius='10px' w='100%' />
 
-      <VStack gap='2em'>
+      <VStack gap='2em' mt={10}>
         {
           modulos?.map(mod => (
             <ModuleLessonCard key={mod.idModulo} modulo={mod} >

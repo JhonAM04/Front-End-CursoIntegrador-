@@ -3,7 +3,7 @@ import WritingTemplate from "../shared/components/WritingTemplate"
 import SpeakingTemplate from "../shared/components/SpeakingTemplate"
 import useApi from "../shared/hooks/useApi"
 import { useEffect, useState } from "react"
-import { activitie, enunciado, question, sessionvar } from "../declarations/ApiDeclarations"
+import { activitie, enunciado, question, sessionvar, speaking } from "../declarations/ApiDeclarations"
 import ReadingTemplate from "../shared/components/ReadingTemplate"
 
 // Tipo extendido con las nuevas propiedades
@@ -13,7 +13,7 @@ type questionExtended = question & {
 }
 
 const Activitie = () => {
-  const { getActivitie, getQuestion, getEnunciado } = useApi()
+  const { getActivitie, getQuestion, getEnunciado, getSpeaking } = useApi()
   const { id } = useParams()
   const idActivitie = Number(id)
 
@@ -22,6 +22,7 @@ const Activitie = () => {
   const [activitie, setActivitie] = useState<activitie>()
   const [questions, setQuestions] = useState<questionExtended[]>()
   const [enunciado, setEnunciado] = useState<enunciado>()
+  const [speaks, setSpeaks] = useState<Array<speaking>>()
 
   // Función para separar el enunciado en partes con null donde hay espacios
   const formatSentence = (sentence: string): (string | null)[] => {
@@ -41,7 +42,7 @@ const Activitie = () => {
     const data = await getActivitie(session.token, idActivitie)
     setActivitie(data)
 
-    if(data.tipo == 2){
+    if(data.tipo == 1){
       const data2: question[] = await getQuestion(session.token, idActivitie)
 
       // Transformamos cada pregunta para agregar sentenceParts y correctAnswers
@@ -55,9 +56,16 @@ const Activitie = () => {
       }
       return
     }
-    if(data.tipo == 1){
+    if(data.tipo == 2){
       const data3 = await getEnunciado(session.token, idActivitie)
       setEnunciado(data3)
+      console.log(data3)
+      return
+    }
+    if(data.tipo == 3){
+      const data4 = await getSpeaking(session.token, idActivitie)
+      setSpeaks(data4)
+      console.log(data4)
       return
     }
 
@@ -69,7 +77,7 @@ const Activitie = () => {
 
   return (
     <>
-      {activitie?.tipo === 2 &&
+      {activitie?.tipo === 1 &&
         questions?.map((q, index) => (
           <WritingTemplate
             key={index}
@@ -78,8 +86,8 @@ const Activitie = () => {
           />
         ))}
 
-      {activitie?.tipo === 1 && <ReadingTemplate enun={enunciado!} />}
-      {activitie?.tipo === 3 && <SpeakingTemplate />}
+      {activitie?.tipo === 2 && <ReadingTemplate enun={enunciado!} />}
+      {activitie?.tipo === 3 && <SpeakingTemplate speak={speaks!} />}
     </>
   )
 }

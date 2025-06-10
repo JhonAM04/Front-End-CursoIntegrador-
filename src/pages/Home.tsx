@@ -4,18 +4,52 @@ import item1 from "../assets/homeItem1.jpg"
 import item2 from "../assets/homeItem2.jpg"
 import AOS from 'aos'
 import 'aos/dist/aos.css'
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import WelcomeVoice from "../shared/components/WelcomeVoice"
+import Joyride, { Step } from "react-joyride"
+import CapybaraTour from "../shared/components/CapybaraTour"
 
 const Home = () => {
+  const [run, setRun] = useState(false)
+
+  const steps: Step[] = [
+    {
+      target: "#lessons-section",
+      content: "Aquí encuentras todas las lecciones para aprender inglés paso a paso 📚",
+    },
+    {
+      target: "#activities-section",
+      content: "¡En esta seccion trabajaras las actividades para demostrar tu nivel! ✍️",
+    },
+    {
+      target: "#profile-section",
+      content: "Haz clic en tu nombre para ver o editar tu perfil de usuario 👤",
+    },
+  ]
 
   useEffect(() => {
     AOS.init({
       once: true
-    });
-  }, []);
+    })
+    // Escucha evento desde el botón
+    const listener = () => setRun(true)
+    window.addEventListener("start-tutorial", listener)
+
+    return () => window.removeEventListener("start-tutorial", listener)
+  }, [])
   
   return (
     <>
+        <WelcomeVoice />
+        <Joyride
+          steps={steps}
+          run={run}
+          continuous
+          scrollToFirstStep
+          showSkipButton
+          styles={{ options: { zIndex: 10000 } }}
+          tooltipComponent={CapybaraTour}
+        />
         <VStack  gap='5em' bgColor='#f2f2f2'>
 
           <Box as="video" autoPlay loop muted height={{md: '90vh'}} borderRadius='20px'  width= '100vw' objectFit='cover' objectPosition='center'>
