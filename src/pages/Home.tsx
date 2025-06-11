@@ -22,6 +22,10 @@ const Home = () => {
       content: "¡En esta seccion trabajaras las actividades para demostrar tu nivel! ✍️",
     },
     {
+      target: "#games-section",
+      content: "Aqui encontraras muchos juegos para practicar tu ingles y divertirte al mismo tiempo!!!",
+    },
+    {
       target: "#profile-section",
       content: "Haz clic en tu nombre para ver o editar tu perfil de usuario 👤",
     },

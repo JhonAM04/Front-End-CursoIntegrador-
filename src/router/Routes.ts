@@ -14,7 +14,8 @@ export const Elements = {
     Lessons: lazy(()=> import("../pages/Lessons")),
     Activities: lazy(()=> import("../pages/Activities")),
     Activitie: lazy(()=> import("../pages/Activitie")),
-    Lesson: lazy(()=> import("../pages/Lesson"))
+    Lesson: lazy(()=> import("../pages/Lesson")),
+    Games: lazy(()=> import("../pages/Games"))
 }
 
 export const Paths = {
@@ -27,5 +28,6 @@ export const Paths = {
     CrudPerfil: '/crudPerfil',
     PagePassword: '/changepass',
     Lessons: '/lessons',
-    Activities: '/activities'
+    Activities: '/activities',
+    Games: '/games'
 }

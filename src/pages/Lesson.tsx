@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import { sessionvar, lesson } from "../declarations/ApiDeclarations"
 import useApi from "../shared/hooks/useApi"
 import LessonRender from "../shared/components/LessonRender"
+import { VStack } from "@chakra-ui/react"
 
 const Lesson = () => {
     const {id} = useParams()
@@ -20,9 +21,11 @@ const Lesson = () => {
     },[])
   return (
     <>
-      {
-        leccion? <LessonRender less={leccion} /> : 'cargando contenido'
-      }
+      <VStack w='100%' height='90vh' justifyContent='center'>
+          {
+            leccion? <LessonRender less={leccion} /> : 'cargando contenido'
+          }
+      </VStack>
     </>
   )
 }

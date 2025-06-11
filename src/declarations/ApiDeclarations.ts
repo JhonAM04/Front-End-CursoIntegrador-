@@ -33,6 +33,7 @@ export type activitie = {
     tipo: number
     titulo: string
     modulo: modules
+    img: string
 }
 
 export type lesson = {

@@ -1,4 +1,4 @@
-import { Box, Heading, HStack, VStack } from "@chakra-ui/react"
+import { Heading, HStack, SimpleGrid, VStack } from "@chakra-ui/react"
 import { modules } from "../../declarations/ApiDeclarations"
 
 
@@ -7,9 +7,9 @@ const ModuleCard = ({modulo, children }:{modulo: modules, children: React.ReactN
     <HStack h='fit-content'>
         <VStack padding='15px' gap='60px'>
             <Heading>{modulo.modulo}</Heading>
-            <Box display='flex' justifyContent='space-between' w='70%' flexWrap='wrap' gap='1em'>
+              <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }}  spacing={6} w="100%" justifyContent="center">
                 {children}
-            </Box>
+              </SimpleGrid>
         </VStack>
     </HStack>
   )

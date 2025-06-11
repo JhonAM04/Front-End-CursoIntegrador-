@@ -24,9 +24,9 @@ const NavBar = () => {
     <>
       
 
-        <VStack alignItems='flex-start'  gap='1em' p='1em'  height='95vh' w='200px' bgColor='#2b8687' boxShadow='dark-lg' color='white' borderRadius='20px' >
+        <VStack justifyContent='space-between' gap='1em' p='1em'  height='95vh' w='200px' bgColor='#2b8687' boxShadow='dark-lg' color='white' borderRadius='20px' >
             
-                <Box display='flex' alignItems='center' justifyContent='center' mb='50px' w='100%'>
+                <Box display='flex' alignItems='center' justifyContent='center' w='100%'>
                   <Image src={logo} boxSize='120px' />
                 </Box>
 
@@ -48,13 +48,14 @@ const NavBar = () => {
                     <Link to={Paths.Home} > 🏠 Home</Link>
                     <Link to={Paths.Lessons} id="lessons-section" > 📚 Lessons</Link>
                     <Link to={Paths.Activities} id="activities-section" > ✍️ Activities</Link>
+                    <Link to={Paths.Games} id="games-section" > 🎮 Games</Link>
                   </>
                 }
                 </VStack>
 
-                <Image src={mascota} boxSize='150px' mt='180px' />
+                <Image src={mascota} boxSize='150px' />
                 {showTutorialBtn && (
-                  <Box w='100%' display='flex' justifyContent='center'>
+                  
                     <Button
                       id="start-tutorial-btn"
                       colorScheme="teal"
@@ -68,7 +69,7 @@ const NavBar = () => {
                     >
                       🎉 Start the tutorial
                     </Button>
-                  </Box>
+                  
                 )}
         </VStack>
 
