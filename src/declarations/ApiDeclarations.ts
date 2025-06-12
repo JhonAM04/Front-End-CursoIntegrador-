@@ -85,3 +85,11 @@ export type speaking  = {
     img: string
     respuesta: string
 }
+
+export type games = {
+    idGames: number
+    descripcion: string
+    img: string
+    titulo: string
+    url: string
+}

@@ -15,7 +15,8 @@ export const Elements = {
     Activities: lazy(()=> import("../pages/Activities")),
     Activitie: lazy(()=> import("../pages/Activitie")),
     Lesson: lazy(()=> import("../pages/Lesson")),
-    Games: lazy(()=> import("../pages/Games"))
+    Games: lazy(()=> import("../pages/Games")),
+    Game: lazy(()=> import("../pages/Game"))
 }
 
 export const Paths = {
