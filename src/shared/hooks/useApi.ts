@@ -324,10 +324,28 @@ const useApi = () =>{
       return response
     }
 
+    const avancePerfilActividad = async(token: string, id:number) => {
+      const bd = await fetch(`http://localhost:8080/progreso-actividad/por-perfil/${id}`,{
+        method: 'GET',
+        headers: {'Authorization': `Bearer ${token}`}
+      })
+      const response = await bd.json()
+      return response
+    }
+
+    const actividadCompletado = async(token: string, id:number) => {
+      const bd = await fetch(`http://localhost:8080/progreso-actividad/pro-act-est/${id}`,{
+        method: 'PUT',
+        headers: {'Authorization': `Bearer ${token}`}
+      })
+      const response = await bd.json()
+      return response
+    }
+
 
 
     return{
-        apiLogin, getProfileandAccount, getEmail, editarProfile, crearCuenta, crearPerfil, getAllProfiles, getAccounts, deleteProfile, updatePassword, getProfilesWhitoutAccount, getActivities, getModules, getLessons, getActivitie, getLesson, getQuestion, getEnunciado, getSpeaking, getGames, getGame
+        apiLogin, getProfileandAccount, getEmail, editarProfile, crearCuenta, crearPerfil, getAllProfiles, getAccounts, deleteProfile, updatePassword, getProfilesWhitoutAccount, getActivities, getModules, getLessons, getActivitie, getLesson, getQuestion, getEnunciado, getSpeaking, getGames, getGame, avancePerfilActividad, actividadCompletado
     }
 }
 

@@ -93,3 +93,10 @@ export type games = {
     titulo: string
     url: string
 }
+
+export type avanceActividad = {
+    id: number
+    perfil: profile
+    actividad: activitie
+    completado: boolean
+}
