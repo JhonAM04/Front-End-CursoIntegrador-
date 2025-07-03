@@ -3,6 +3,7 @@ import SpeakingCard from "./SpeakingCard"
 import { speaking } from "../../declarations/ApiDeclarations"
 import capyto from '../../assets/capytoSpeaking.gif'
 import dialogoCapyto from '../../assets/dialogoSpeaking.png'
+import CapybaraMessages from "./CapybaraMessages"
 
 const SpeakingTemplate = ({ speak }: { speak: Array<speaking> }) => {
   return (
@@ -61,6 +62,7 @@ const SpeakingTemplate = ({ speak }: { speak: Array<speaking> }) => {
           <SpeakingCard key={s.idSpeaking} word={s.respuesta} img={s.img} />
         ))}
       </SimpleGrid>
+      <CapybaraMessages />
     </Box>
   )
 }

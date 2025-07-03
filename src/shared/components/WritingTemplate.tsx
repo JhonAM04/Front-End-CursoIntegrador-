@@ -1,6 +1,7 @@
 import { Box, VStack, Text, Input, Button, Wrap, WrapItem, HStack, Heading, Image } from "@chakra-ui/react"
 import { useState, useMemo } from "react"
 import capytoReading from '../../assets/readcapy.png'
+import CapybaraMessages from "./CapybaraMessages"
 
 type ActivityProps = {
   sentenceParts: (string | null)[]
@@ -107,6 +108,7 @@ const WritingTemplate = ({ sentenceParts, correctAnswers }: ActivityProps) => {
             </Text>
           )}
         </VStack>
+        <CapybaraMessages />
     </Box>
   )
 }

@@ -3,6 +3,7 @@ import { useState } from "react"
 import { enunciado } from "../../declarations/ApiDeclarations"
 import capytoSucces from '../../assets/capytoSuccessR.gif'
 import capytoFailed from '../../assets/capytoFailedR.gif'
+import CapybaraMessages from "./CapybaraMessages"
 
 const ReadingTemplate = ({ enun }: { enun: enunciado }) => {
   const [respuestas, setRespuestas] = useState<{ [key: number]: string }>({})
@@ -92,6 +93,7 @@ const ReadingTemplate = ({ enun }: { enun: enunciado }) => {
       <Button colorScheme="teal" onClick={handleSubmit} isDisabled={botonDeshabilitado} alignSelf="center">
         Enviar respuestas
       </Button>
+      <CapybaraMessages />
     </VStack>
   )
 }
